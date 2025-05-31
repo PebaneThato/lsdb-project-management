@@ -8,4 +8,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'lsdb-registration-form';
   submittedData: any = null;
+
+  userRoles = [
+    { value: 'Accountant', label: 'Accountant' },
+    { value: 'Administrator', label: 'Administrator' },
+    { value: 'Human Resource', label: 'Human Resource' },
+  ];
 }
