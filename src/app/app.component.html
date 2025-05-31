@@ -1,13 +1,12 @@
-<div class="container mt-5 h4" background-colour="blue">
+<div class="container mt-5 h4">
   <div class="row">
     Create New User
     <hr class="hr bg-secondary border-2 border-top border-secondary" />
   </div>
 </div>
-<div class="container mt-5 form-container form-background-color" background-colour="blue">
+<div class="container mt-5 form-container form-background-color">
   <form>
     <div class="row">
-      
       <div class="col-md-6">
         <div class="mb-3">
           <label for="firstName" class="form-label">Enter User First Name<span class="required">*</span></label>
@@ -32,8 +31,8 @@
           <input type="text" class="form-control" id="contactNumber" placeholder="User Contact Number">
         </div>
         <div class="mb-3">
-          <label for="contactNumber" class="form-label">Select User Role<span class="required">*</span></label>
-          <select class="form-select">
+          <label for="userRole" class="form-label">Select User Role<span class="required">*</span></label>
+          <select id="userRole" class="form-select">
             <option>-- User Role -- </option>
             <option>Accountant</option>
             <option>Administrator</option>
@@ -45,3 +44,70 @@
     <button type="submit" class="submit-button btn mx-auto d-block">CREATE USER</button>
   </form>
 </div>
+<div class="container mt-5 details-container">
+  <div class="row details-row">
+    <hr class="bg-secondary border-2 border-secondary" />
+  </div>
+  <div class="card mb-3 card">
+    <div class="card-header h4 card-header-text">User Regitered Details</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">First Name</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              Kenneth
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Last Name</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              Valdez
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Email Address</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              test.lsdb@lsdb.co.uk
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Password</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              ********************
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">User Role</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              Accountant
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0"> Contact Number</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              52525235235235
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
