@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/app.interface';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-add-user',
@@ -10,6 +11,7 @@ import { User } from 'src/app/app.interface';
 export class AddUserComponent {
   userForm: FormGroup;
   submittedUserData: User | null = null;
+  successMessage: string = '';
 
   userRoles = [
     { value: 'Accountant', label: 'Accountant' },
@@ -17,7 +19,7 @@ export class AddUserComponent {
     { value: 'Human Resource', label: 'Human Resource' },
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private userService: UserService) {
     this.userForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -30,11 +32,15 @@ export class AddUserComponent {
 
   onSubmit(): void {
     if (this.userForm.valid) {
-      let maskedPassword = this.userForm.value.password.replace(/./g, '•');
-      this.userForm.patchValue({
-        password: maskedPassword
+      this.userService.createUser(this.userForm.value).subscribe(response => {
+        this.successMessage = 'User successfully registered!';
+        let maskedPassword = this.userForm.value.password.replace(/./g, '•');
+        this.userForm.patchValue({
+          password: maskedPassword
+        });
+        this.submittedUserData = this.userForm.value as User;
+        this.userForm.reset();
       });
-      this.submittedUserData = this.userForm.value as User;
     }
   }
 

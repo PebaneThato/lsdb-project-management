@@ -8,16 +8,22 @@
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email Address</th>
+                <th>Password</th>
+                <th>Contact Number</th>
+                <th>User Role</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let user of users">
-                <td>{{ user.id }}</td>
-                <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.emailAddress }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.contactNumber }}</td>
+                <td>{{ user.userRole }}</td>
             </tr>
         </tbody>
     </table>
