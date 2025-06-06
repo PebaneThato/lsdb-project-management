@@ -1,0 +1,111 @@
+<div class="container mt-5 h4">
+  <div class="row">
+    Create New User
+    <hr class="hr bg-secondary border-2 border-top border-secondary" />
+  </div>
+</div>
+<div class="container mt-5 form-container form-background-color">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="firstName" class="form-label">Enter User First Name<span class="required">*</span></label>
+          <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="User First Name">
+        </div>
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Enter User Last Name<span class="required">*</span></label>
+          <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="User Last Name">
+        </div>
+        <div class="mb-3">
+          <label for="emailAddress" class="form-label">Enter User Email Address<span class="required">*</span></label>
+          <input type="text" class="form-control" id="emailAddress" formControlName="emailAddress" placeholder="User Email Address">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="password" class="form-label">Enter User Password<span class="required">*</span></label>
+          <input type="password" class="form-control" id="password" formControlName="password" placeholder="User Password">
+        </div>
+        <div class="mb-3">
+          <label for="contactNumber" class="form-label">Enter User Contact Number<span class="required">*</span></label>
+          <input type="text" class="form-control" id="contactNumber" formControlName="contactNumber" placeholder="User Contact Number">
+        </div>
+        <div class="mb-3">
+          <label for="userRole" class="form-label">Select User Role<span class="required">*</span></label>
+          <select id="userRole" class="form-select" formControlName="userRole" >
+            <option value="">-- User Role -- </option>
+            <option *ngFor="let role of userRoles" [value]="role.value">{{role.label}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="submit-button btn mx-auto d-block" [disabled]="userForm.invalid">CREATE USER</button>
+  </form>
+</div>
+<div *ngIf="submittedUserData" class="container mt-5 details-container">
+  <div class="row details-row">
+    <hr class="bg-secondary border-2 border-secondary" />
+  </div>
+  <div class="card mb-3 card">
+    <div class="card-header h4 card-header-text">User Regitered Details</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">First Name</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ submittedUserData.firstName }}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Last Name</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ submittedUserData.lastName }}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Email Address</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ submittedUserData.emailAddress }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Password</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ submittedUserData.password }}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">User Role</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ submittedUserData.userRole }}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Contact Number</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ submittedUserData.contactNumber }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
