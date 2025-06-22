@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'
 
 import { AddProjectComponent } from './add-project/add-project.component';
+import { ProjectsListComponent } from './projects-list/projects-list.component';
 
 @NgModule({
   declarations: [
-    AddProjectComponent
+    AddProjectComponent,
+    ProjectsListComponent
   ],
   imports: [
     CommonModule,
