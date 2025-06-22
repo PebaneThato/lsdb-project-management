@@ -1,0 +1,25 @@
+<div class="container mt-5">
+    <!-- <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ successMessage }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div> -->
+</div>
+<div class="container col-md-6 login-form-container">
+    <div class="logo">
+        <img src="assets/images/lsdb_logo.png" alt="Logo">
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username<span class="required">*</span></label>
+                <input type="text" class="form-control" id="username" formControlName="username" placeholder="Username">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password<span class="required">*</span></label>
+                <input type="password" class="form-control" id="password" formControlName="password"
+                    placeholder="Password">
+            </div>
+        </div>
+        <button type="submit" class="submit-button btn mx-auto d-block w-25" [disabled]="loginForm.invalid">LOGIN</button>
+    </form>
+</div>
