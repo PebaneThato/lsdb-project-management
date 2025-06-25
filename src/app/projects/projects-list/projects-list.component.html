@@ -1,1 +1,28 @@
-<p>projects-list works!</p>
+<div class="container mt-5 h4">
+    <div class="row">
+        Project List
+        <hr class="hr bg-secondary border-2 border-top border-secondary" />
+    </div>
+</div>
+<div class="container mt-5 table-container">
+    <table class="table table-striped table-bordered">
+        <thead class="table-light"> 
+            <tr>
+                <th>Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th> Details</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let project of projects$ | async">
+                <td>{{ project.projectName }}</td>
+                <td>{{ project.projectStartDate }}</td>
+                <td>{{ project.projectEndDate }}</td>
+                <td><button class="action-button btn btn-sm mx-auto d-block" (click)="onView(project)">View Details</button></td>
+                <td><button class="action-button btn btn-sm mx-auto d-block" (click)="onUpdate(project)">Update Project</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

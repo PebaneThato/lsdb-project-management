@@ -1,8 +1,8 @@
 export interface Project {
-  firstName: string;
-  lastName: string;
-  emailAddress: string;
-  password: string;
-  contactNumber: string;
-  userRole: string;
+  projectName: string;
+  projectStartDate: string;
+  projectEndDate: string;
+  projectDescription: string;
+  projectCreatedBy: string;
+  projectSssignedTo: string;
 }
