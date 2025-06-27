@@ -1,1 +1,57 @@
-<p>add-project works!</p>
+<div class="container mt-5">
+    <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ successMessage }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+<div class="container mt-5 h4">
+    <div class="row">
+        Create New Project
+        <hr class="hr bg-secondary border-2 border-top border-secondary" />
+    </div>
+</div>
+<div class="container mt-5 form-container form-background-color">
+    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="projectName" class="form-label">Project Name<span class="required">*</span></label>
+                    <input type="text" class="form-control" id="projectName" formControlName="projectName"
+                        placeholder="Project Name">
+                </div>
+                <div class="mb-3">
+                    <label for="projectStartDate" class="form-label">Project Start Date<span
+                            class="required">*</span></label>
+                    <input type="text" class="form-control" id="projectStartDate" formControlName="projectStartDate"
+                        placeholder="Project Start Date">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="projectAssignedTo" class="form-label">Assigned Project To<span
+                            class="required">*</span></label>
+                    <select id="projectAssignedTo" class="form-select" formControlName="projectAssignedTo">
+                        <option value="">-- Assigned User-- </option>
+                        <option *ngFor="let user of users$ | async" [value]="user.firstName">{{user.firstName}}</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="projectEndDate" class="form-label">Project End Date<span
+                            class="required">*</span></label>
+                    <input type="text" class="form-control" id="projectEndDate" formControlName="projectEndDate"
+                        placeholder="Project End Date">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <label for="projectDescription" class="form-label">Project Description<span
+                            class="required">*</span></label>
+                    <textarea type="text" class="form-control" id="projectDescription" formControlName="projectDescription"
+                        placeholder="Project Description"></textarea>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="submit-button btn mx-auto d-block" [disabled]="projectForm.invalid">CREATE
+            PROJECT</button>
+    </form>
+</div>

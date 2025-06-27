@@ -4,5 +4,5 @@ export interface Project {
   projectEndDate: string;
   projectDescription: string;
   projectCreatedBy: string;
-  projectSssignedTo: string;
+  projectAssignedTo: string;
 }

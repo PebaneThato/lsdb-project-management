@@ -22,7 +22,7 @@ export class ProjectsListComponent {
         projectEndDate: "2026-06024",
         projectDescription: "LSDB programme to teach students",
         projectCreatedBy: "1",
-        projectSssignedTo: "5"
+        projectAssignedTo: "5"
       },
       {
         projectName: "Induction Project For New Comers",
@@ -30,7 +30,7 @@ export class ProjectsListComponent {
         projectEndDate: "2026-06024",
         projectDescription: "LSDB programme to teach students",
         projectCreatedBy: "1",
-        projectSssignedTo: "5"
+        projectAssignedTo: "5"
       }
     ]);
   }
