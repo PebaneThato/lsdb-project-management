@@ -6,7 +6,7 @@
 </div>
 <div class="container mt-5 h4">
   <div class="row">
-    Create New User
+    {{headerText}}
     <hr class="hr bg-secondary border-2 border-top border-secondary" />
   </div>
 </div>
@@ -31,7 +31,7 @@
       </div>
       <div class="col-md-6">
         <div class="mb-3">
-          <label for="password" class="form-label">Enter User Password<span class="required">*</span></label>
+          <label for="password" class="form-label">Enter User Password<span *ngIf ="!isEditMode" class="required">*</span></label>
           <input type="password" class="form-control" id="password" formControlName="password"
             placeholder="User Password">
         </div>
@@ -49,10 +49,10 @@
         </div>
       </div>
     </div>
-    <button type="submit" class="submit-button btn mx-auto d-block" [disabled]="userForm.invalid">CREATE USER</button>
+    <button type="submit" class="submit-button btn mx-auto d-block" [disabled]="userForm.invalid">{{buttonText}}</button>
   </form>
 </div>
-<div *ngIf="submittedUserData" class="container mt-5 details-container">
+<div *ngIf="user" class="container mt-5 details-container">
   <div class="row details-row">
     <hr class="bg-secondary border-2 border-secondary" />
   </div>
@@ -66,7 +66,7 @@
               <h6 class="mb-0">First Name</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              {{ submittedUserData.firstName }}
+              {{ user.firstName }}
             </div>
           </div>
           <hr>
@@ -75,7 +75,7 @@
               <h6 class="mb-0">Last Name</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              {{ submittedUserData.lastName }}
+              {{ user.lastName }}
             </div>
           </div>
           <hr>
@@ -84,7 +84,7 @@
               <h6 class="mb-0">Email Address</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              {{ submittedUserData.emailAddress }}
+              {{ user.emailAddress }}
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@
               <h6 class="mb-0">Password</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              {{ submittedUserData.password }}
+              {{ user.password }}
             </div>
           </div>
           <hr>
@@ -103,7 +103,7 @@
               <h6 class="mb-0">User Role</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              {{ submittedUserData.userRole }}
+              {{ user.userRole }}
             </div>
           </div>
           <hr>
@@ -112,7 +112,7 @@
               <h6 class="mb-0">Contact Number</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              {{ submittedUserData.contactNumber }}
+              {{ user.contactNumber }}
             </div>
           </div>
         </div>

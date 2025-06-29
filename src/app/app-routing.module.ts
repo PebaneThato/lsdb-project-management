@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddUserComponent } from './users/add-user/add-user.component';
+import { UserFormComponent } from './users/user-form/user-form.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import { AddProjectComponent } from './projects/add-project/add-project.component';
@@ -12,8 +12,9 @@ const routes: Routes = [
   { path: '', redirectTo: 'project-list', pathMatch: 'full' },
   { path: 'login', component: LoginFormComponent },
   { path: 'users-list', component: UsersListComponent },
-  { path: 'users-details', component: UserDetailsComponent },
-  { path: 'create-user', component: AddUserComponent },
+  { path: 'user-details/:id', component: UserDetailsComponent },
+  { path: 'create-user', component: UserFormComponent },
+  { path: 'update-user/:id', component: UserFormComponent },
   { path: 'projects-list', component: ProjectsListComponent },
   { path: 'project-details', component: ProjectDetailsComponent },
   { path: 'create-project', component: AddProjectComponent },

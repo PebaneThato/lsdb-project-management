@@ -7,9 +7,18 @@ import { User } from '../interfaces/app.interface.user';
   providedIn: 'root'
 })
 export class UserService {
-  // private host = 'http://localhost:8000/';
 
-  constructor(private http: HttpClient) {}
+  private selectedUser: User | null = null;
+
+  constructor(private http: HttpClient) { }
+
+  setSelectedUser(user: User) {
+    this.selectedUser = user;
+  }
+
+  getSelectedUser(): User | null {
+    return this.selectedUser;
+  }
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>('/api/users.php');
@@ -18,4 +27,13 @@ export class UserService {
   createUser(user: User): Observable<User> {
     return this.http.post<User>('/api/register.php', user);
   }
+
+  updateUser(user: User): Observable<User> {
+    return this.http.put<User>('/api/register.php', user);
+  }
+
+  fetchUserById(id: number): Observable<User> {
+    return this.http.get<User>(`/api/users.php?id=${id}`);
+  }
+
 }

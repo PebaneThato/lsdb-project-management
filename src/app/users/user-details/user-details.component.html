@@ -3,11 +3,10 @@
         User Details
         <hr class="hr bg-secondary border-2 border-top border-secondary" />
     </div>
+    <button class="action-button btn btn-sm mx-auto" (click)="onViewUsers()">Back</button>
 </div>
-<div *ngIf="userDetails" class="container mt-5 details-container">
-    <div class="row details-row">
-        <hr class="bg-secondary border-2 border-secondary" />
-    </div>
+
+<div *ngIf="user" class="container mt-5 details-container">
     <div class="card mb-3 card">
         <div class="card-header h4 card-header-text">User Details</div>
         <div class="card-body">
@@ -18,7 +17,7 @@
                             <h6 class="mb-0">First Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{ userDetails.firstName }}
+                            {{ user.firstName }}
                         </div>
                     </div>
                     <hr>
@@ -27,7 +26,7 @@
                             <h6 class="mb-0">Last Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{ userDetails.lastName }}
+                            {{ user.lastName }}
                         </div>
                     </div>
                     <hr>
@@ -36,7 +35,7 @@
                             <h6 class="mb-0">Email Address</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{ userDetails.emailAddress }}
+                            {{ user.emailAddress }}
                         </div>
                     </div>
                 </div>
@@ -46,7 +45,7 @@
                             <h6 class="mb-0">Password</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{ userDetails.password }}
+                            {{ user.password }}
                         </div>
                     </div>
                     <hr>
@@ -55,7 +54,7 @@
                             <h6 class="mb-0">User Role</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{ userDetails.userRole }}
+                            {{ user.userRole }}
                         </div>
                     </div>
                     <hr>
@@ -64,7 +63,7 @@
                             <h6 class="mb-0">Contact Number</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{ userDetails.contactNumber }}
+                            {{ user.contactNumber }}
                         </div>
                     </div>
                 </div>
