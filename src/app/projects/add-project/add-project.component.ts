@@ -30,6 +30,7 @@ export class AddProjectComponent {
   ngOnInit(): void {
     this.users$ = of([
       {
+        id: 1,
         firstName: "string",
         lastName: "string",
         emailAddress: "string",

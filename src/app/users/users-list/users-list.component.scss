@@ -6,13 +6,27 @@
     margin-top: 19px;
 }
 
-th {
-    background-color: #eef6f1;
-    color: #053b8f;
-}
-
 .table-container {
-    margin-top: 0px !important;
     padding-left: 0px;
     padding-right: 0px;
+}
+
+.action-button {
+    background-color: #0000b3;
+    color: #fff;
+}
+
+table thead th {
+  text-align: center;
+}
+
+thead > tr > th {
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.custom-bordered,
+.custom-bordered th,
+.custom-bordered td {
+  border: 1.5px solid #cbc5c5 !important;
 }

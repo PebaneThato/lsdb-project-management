@@ -17,4 +17,12 @@ export class UsersListComponent {
       this.users = data;
     });
   }
+
+  onViewUser(user: User){
+
+  }
+
+  onUpdateUser(user: User){
+
+  }
 }

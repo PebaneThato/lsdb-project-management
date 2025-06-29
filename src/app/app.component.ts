@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  isLoggedIn!: boolean;
+  avatarUrl = 'https://i.pravatar.cc/150?img=3';
 
+  logout() {
+
+  }
+
+  login() {
+
+  }
 }
