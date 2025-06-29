@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Project } from 'src/app/interfaces/app.interface.project';
 import { ProjectService } from 'src/app/services/project.service';
@@ -12,36 +13,20 @@ export class ProjectsListComponent {
   projects: Project[] = [];
   projects$: Observable<Project[]> | undefined;
 
-  constructor(private projectervice: ProjectService) { }
+  constructor(private projectervice: ProjectService, private router: Router) { }
 
   ngOnInit(): void {
-    this.projects$ = of([
-      {
-        id: 1,
-        projectName: "Test Project Name",
-        projectStartDate: "2025-06-25",
-        projectEndDate: "2026-06024",
-        projectDescription: "LSDB programme to teach students",
-        projectCreatedBy: "1",
-        projectAssignedTo: "5"
-      },
-      {
-        id: 2,
-        projectName: "Induction Project For New Comers",
-        projectStartDate: "2025-06-25",
-        projectEndDate: "2026-06024",
-        projectDescription: "LSDB programme to teach students",
-        projectCreatedBy: "1",
-        projectAssignedTo: "5"
-      }
-    ]);
+    this.projects$ = this.projectervice.getProjects();
   }
 
-  onView(project: Project) {
-    console.log('Edit clicked:', project);
+  onViewProject(project: Project) {
+    console.log(project);
+    this.projectervice.setSelectedProject(project);
+    this.router.navigate(['/project-details', project.id]);
   }
 
-  onUpdate(project: Project) {
-    console.log('Update clicked:', project);
+  onUpdateProject(project: Project) {
+    this.projectervice.setSelectedProject(project);
+    this.router.navigate(['/update-project', project.id]);
   }
 }

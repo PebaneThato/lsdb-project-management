@@ -17,11 +17,13 @@ const routes: Routes = [
   { path: 'update-user/:id', component: UserFormComponent },
   { path: 'projects-list', component: ProjectsListComponent },
   { path: 'project-details', component: ProjectDetailsComponent },
+  { path: 'project-details/:id', component: ProjectDetailsComponent },
   { path: 'create-project', component: AddProjectComponent },
+  { path: 'update-project/:id', component: AddProjectComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

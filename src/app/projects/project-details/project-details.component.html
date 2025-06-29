@@ -3,11 +3,9 @@
         Project Details
         <hr class="hr bg-secondary border-2 border-top border-secondary" />
     </div>
+    <button class="action-button btn btn-sm mx-auto" (click)="onViewProjects()">Back</button>
 </div>
-<div *ngIf="projectDetails" class="container mt-5 details-container">
-    <div class="row details-row">
-        <hr class="bg-secondary border-2 border-secondary" />
-    </div>
+<div *ngIf="project" class="container mt-5 details-container">
     <div class="card mb-3 card">
         <div class="card-header h4 card-header-text">Project Details</div>
         <div class="card-body">
@@ -18,53 +16,53 @@
                             <h6 class="mb-0">Project Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{ projectDetails.projectName }}
+                            {{ project.projectName }}
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-sm-3">
-                            <h6 class="mb-0">Last Name</h6>
+                            <h6 class="mb-0">Project Start Date</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{ projectDetails.projectStartDate }}
+                            {{ project.projectStartDate }}
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-sm-3">
-                            <h6 class="mb-0">Email Address</h6>
+                            <h6 class="mb-0">Project End Date</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{ projectDetails.projectStartDate }}
+                            {{ project.projectEndDate }}
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-sm-3">
-                            <h6 class="mb-0">Password</h6>
+                            <h6 class="mb-0">Project Description</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{ projectDetails.projectStartDate }}
+                            {{ project.projectDescription }}
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-sm-3">
-                            <h6 class="mb-0">User Role</h6>
+                            <h6 class="mb-0">Project Created By</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{ projectDetails.projectStartDate }}
+                            {{ project.projectCreatedBy }}
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-sm-3">
-                            <h6 class="mb-0">Contact Number</h6>
+                            <h6 class="mb-0">Project Assigned To</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{ projectDetails.projectStartDate }}
+                            {{ project.projectAssignedTo }}
                         </div>
                     </div>
                 </div>

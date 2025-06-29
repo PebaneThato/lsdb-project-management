@@ -20,7 +20,6 @@ export class UsersListComponent {
   }
 
   onViewUser(user: User) {
-    console.log(user);
     this.userService.setSelectedUser(user);
     this.router.navigate(['/user-details', user.id]);
   }

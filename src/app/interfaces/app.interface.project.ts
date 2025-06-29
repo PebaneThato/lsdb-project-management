@@ -4,6 +4,6 @@ export interface Project {
   projectStartDate: string;
   projectEndDate: string;
   projectDescription: string;
-  projectCreatedBy: string;
-  projectAssignedTo: string;
+  projectCreatedBy: number;
+  projectAssignedTo: number;
 }
