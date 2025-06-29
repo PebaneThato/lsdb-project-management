@@ -6,7 +6,7 @@
 </div>
 <div class="container mt-5 h4">
     <div class="row">
-        Create New Project
+        {{headerText}}
         <hr class="hr bg-secondary border-2 border-top border-secondary" />
     </div>
 </div>
@@ -53,7 +53,6 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="submit-button btn mx-auto d-block" [disabled]="projectForm.invalid">CREATE
-            PROJECT</button>
+        <button type="submit" class="submit-button btn mx-auto d-block" [disabled]="projectForm.invalid">{{buttonText}}</button>
     </form>
 </div>

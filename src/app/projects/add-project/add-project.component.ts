@@ -6,6 +6,7 @@ import { User } from 'src/app/interfaces/app.interface.user';
 import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-project',
@@ -18,8 +19,12 @@ export class AddProjectComponent {
   successMessage: string = '';
   users$: Observable<User[]> | undefined;
   currentUserId: number = 1;
+  isEditMode = false;
+  projectId!: number;
+  buttonText: string = 'CREATE PROJECT';
+  headerText: string = 'Create New Project';
 
-  constructor(private fb: FormBuilder, private projectService: ProjectService, private userService: UserService) {
+  constructor(private fb: FormBuilder, private projectService: ProjectService, private userService: UserService, private route: ActivatedRoute) {
     this.projectForm = this.fb.group({
       id: [''],
       projectName: ['', Validators.required],
@@ -28,6 +33,23 @@ export class AddProjectComponent {
       projectDescription: ['', Validators.required],
       projectCreatedBy: [''],
       projectAssignedTo: ['', Validators.required],
+    });
+
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
+      if (id) {
+        this.isEditMode = true;
+        this.buttonText = 'UPDATE PROJECT';
+        this.headerText = 'Update Project';
+        this.projectId = +id;
+        this.projectService.fetchProjectById(this.projectId).subscribe({
+          next: (project) => {
+            this.projectForm.patchValue(project);
+            this.projectForm.patchValue({ projectStartDate: this.parseDate(project['projectStartDate']) });
+            this.projectForm.patchValue({ projectEndDate: this.parseDate(project['projectEndDate']) });
+          }
+        });
+      }
     });
   }
 
@@ -39,7 +61,6 @@ export class AddProjectComponent {
 
   onSubmit(): void {
     if (this.projectForm.valid) {
-      console.log(this.projectForm.value);
 
       const startDate = this.formatDate(this.projectForm.value.projectStartDate);
       const endDate = this.formatDate(this.projectForm.value.projectEndDate);
@@ -47,12 +68,21 @@ export class AddProjectComponent {
       this.projectForm.patchValue({ projectCreatedBy: this.currentUserId });
       this.projectForm.patchValue({ projectStartDate: startDate });
       this.projectForm.patchValue({ projectEndDate: endDate });
-      console.log(this.projectForm.value);
-      this.projectService.createProject(this.projectForm.value).subscribe(response => {
-        this.successMessage = 'Project successfully registered!';
-        this.submittedProjectData = this.projectForm.value as Project;
-        this.projectForm.reset();
-      });
+
+      if (this.isEditMode) {
+        this.projectService.updateProject(this.projectForm.value).subscribe(() => {
+          this.successMessage = 'Project updated successfully!';
+          this.submittedProjectData = this.projectForm.value as Project;
+          this.projectForm.reset();
+        });
+      } else {
+        this.projectService.createProject(this.projectForm.value).subscribe(response => {
+          this.successMessage = 'Project successfully registered!';
+          this.submittedProjectData = this.projectForm.value as Project;
+          this.projectForm.reset();
+        });
+      }
+
     }
   }
 
@@ -62,6 +92,11 @@ export class AddProjectComponent {
 
   private pad(n: number): string {
     return n < 10 ? '0' + n : '' + n;
+  }
+
+  parseDate(dateString: string): NgbDateStruct {
+    const [year, month, day] = dateString.split('-').map(Number);
+    return { year, month, day };
   }
 
 }

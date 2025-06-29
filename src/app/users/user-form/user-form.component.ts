@@ -24,7 +24,7 @@ export class UserFormComponent {
     { value: 'Member', label: 'Member' },
   ];
 
-  constructor(private fb: FormBuilder, private userService: UserService, private route: ActivatedRoute,) {
+  constructor(private fb: FormBuilder, private userService: UserService, private route: ActivatedRoute) {
     this.userForm = this.fb.group({
       id: [''],
       firstName: [''],
