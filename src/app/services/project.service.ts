@@ -8,13 +8,31 @@ import { Project } from '../interfaces/app.interface.project';
 })
 export class ProjectService {
 
-  constructor(private http: HttpClient) {}
+  private selectedProject: Project | null = null;
 
-  getProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>('/api/users.php');
+  constructor(private http: HttpClient) { }
+
+  setSelectedProject(project: Project) {
+    this.selectedProject = project;
   }
 
-  createProject(user: Project): Observable<Project> {
-    return this.http.post<Project>('/api/register.php', user);
+  getSelectedProject(): Project | null {
+    return this.selectedProject;
+  }
+
+  getProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>('/api/projects.php');
+  }
+
+  createProject(project: Project): Observable<Project> {
+    return this.http.post<Project>('/api/project-management.php', project);
+  }
+
+  updateProject(project: Project): Observable<Project> {
+    return this.http.put<Project>('/api/project-management.php', project);
+  }
+
+  fetchProjectById(id: number): Observable<Project> {
+    return this.http.get<Project>(`/api/projects.php?id=${id}`);
   }
 }

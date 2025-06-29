@@ -17,6 +17,7 @@ export class ProjectsListComponent {
   ngOnInit(): void {
     this.projects$ = of([
       {
+        id: 1,
         projectName: "Test Project Name",
         projectStartDate: "2025-06-25",
         projectEndDate: "2026-06024",
@@ -25,6 +26,7 @@ export class ProjectsListComponent {
         projectAssignedTo: "5"
       },
       {
+        id: 2,
         projectName: "Induction Project For New Comers",
         projectStartDate: "2025-06-25",
         projectEndDate: "2026-06024",
