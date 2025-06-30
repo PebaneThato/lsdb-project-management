@@ -24,7 +24,7 @@ export class LoginFormComponent {
 
   onLogin() {
     if (!this.loginForm.valid) return;
-    console.log(this.loginForm.value);
+    this.errorMessage = "";
     this.authService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(
       (response) => {
         if (response.user) {
