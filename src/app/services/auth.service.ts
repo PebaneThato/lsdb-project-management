@@ -46,7 +46,11 @@ export class AuthService {
         return !!this.currentUserValue;
     }
 
-    isMemberRole(){
+    isMemberRole() {
         return this.currentUserSubject.value.user_role == 'Member';
+    }
+
+    get isProjectManager() {
+        return this.currentUserValue.user_role == 'Project Manager';
     }
 }
