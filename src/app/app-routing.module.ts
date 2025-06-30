@@ -9,7 +9,7 @@ import { ProjectDetailsComponent } from './projects/project-details/project-deta
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'project-list', pathMatch: 'full' },
+  { path: '', redirectTo: 'users-list', pathMatch: 'full' },
   { path: 'login', component: LoginFormComponent },
   { path: 'users-list', component: UsersListComponent },
   { path: 'user-details/:id', component: UserDetailsComponent },

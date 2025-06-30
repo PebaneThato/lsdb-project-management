@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   isLoggedIn!: boolean;
-  avatarUrl = 'https://i.pravatar.cc/150?img=3';
+
+  constructor(public authService: AuthService) {}
 
   logout() {
-
-  }
-
-  login() {
-
+    this.authService.logout();
   }
 }
