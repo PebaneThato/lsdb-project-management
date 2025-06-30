@@ -7,19 +7,21 @@ import { AddProjectComponent } from './projects/add-project/add-project.componen
 import { ProjectsListComponent } from './projects/projects-list/projects-list.component';
 import { ProjectDetailsComponent } from './projects/project-details/project-details.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
+import { AuthGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'users-list', pathMatch: 'full' },
   { path: 'login', component: LoginFormComponent },
-  { path: 'users-list', component: UsersListComponent },
-  { path: 'user-details/:id', component: UserDetailsComponent },
-  { path: 'create-user', component: UserFormComponent },
-  { path: 'update-user/:id', component: UserFormComponent },
-  { path: 'projects-list', component: ProjectsListComponent },
-  { path: 'project-details', component: ProjectDetailsComponent },
-  { path: 'project-details/:id', component: ProjectDetailsComponent },
-  { path: 'create-project', component: AddProjectComponent },
-  { path: 'update-project/:id', component: AddProjectComponent },
+  { path: 'users-list', component: UsersListComponent ,canActivate: [AuthGuard]},
+  { path: 'user-details/:id', component: UserDetailsComponent ,canActivate: [AuthGuard]},
+  { path: 'create-user', component: UserFormComponent ,canActivate: [AuthGuard]},
+  { path: 'update-user/:id', component: UserFormComponent ,canActivate: [AuthGuard]},
+  { path: 'projects-list', component: ProjectsListComponent ,canActivate: [AuthGuard, RoleGuard]},
+  { path: 'project-details', component: ProjectDetailsComponent ,canActivate: [AuthGuard, RoleGuard]},
+  { path: 'project-details/:id', component: ProjectDetailsComponent ,canActivate: [AuthGuard, RoleGuard]},
+  { path: 'create-project', component: AddProjectComponent ,canActivate: [AuthGuard, RoleGuard]},
+  { path: 'update-project/:id', component: AddProjectComponent ,canActivate: [AuthGuard, RoleGuard]},
 ];
 
 @NgModule({

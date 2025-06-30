@@ -45,4 +45,8 @@ export class AuthService {
     isAuthenticated() {
         return !!this.currentUserValue;
     }
+
+    isMemberRole(){
+        return this.currentUserSubject.value.user_role == 'Member';
+    }
 }
