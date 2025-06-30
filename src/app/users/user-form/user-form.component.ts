@@ -76,12 +76,11 @@ export class UserFormComponent {
     if (!this.userForm.valid) return;
 
     this.userForm.patchValue({ id: this.userId });
-    const maskedPassword = this.userForm.value.password?.replace(/./g, '•') || '';
-    this.userForm.patchValue({ password: maskedPassword });
     const formValue = this.userForm.value;
 
     const handleSuccess = (message: string, postProcess?: () => void) => {
       this.successMessage = message;
+      formValue['password'] = this.userForm.value.password?.replace(/./g, '•') || '';
       this.user = formValue as User;
       this.userForm.reset();
       postProcess?.();
