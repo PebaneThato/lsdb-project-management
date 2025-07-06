@@ -7,6 +7,7 @@ import { AddProjectComponent } from './projects/add-project/add-project.componen
 import { ProjectsListComponent } from './projects/projects-list/projects-list.component';
 import { ProjectDetailsComponent } from './projects/project-details/project-details.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
+import { TaskFormComponent } from './tasks/task-form/task-form.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 
@@ -22,6 +23,8 @@ const routes: Routes = [
   { path: 'project-details/:id', component: ProjectDetailsComponent ,canActivate: [AuthGuard, RoleGuard]},
   { path: 'create-project', component: AddProjectComponent ,canActivate: [AuthGuard, RoleGuard]},
   { path: 'update-project/:id', component: AddProjectComponent ,canActivate: [AuthGuard, RoleGuard]},
+  { path: 'create-task', component: TaskFormComponent ,canActivate: [AuthGuard]},
+  { path: 'task-details/:id', component: TaskFormComponent ,canActivate: [AuthGuard]},
 ];
 
 @NgModule({

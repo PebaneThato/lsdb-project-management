@@ -7,13 +7,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginModule } from './login/login.module';
 import { UsersModule } from './users/users.module';
 import { ProjectsModule } from './projects/projects.module';
+import { TasksModule } from './tasks/tasks.module';
 
 import { AppComponent } from './app.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,7 +22,8 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     LoginModule,
     UsersModule,
-    ProjectsModule
+    ProjectsModule,
+    TasksModule
   ],
   providers: [],
   bootstrap: [AppComponent]

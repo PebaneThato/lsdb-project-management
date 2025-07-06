@@ -1,0 +1,97 @@
+<div class="container mt-5">
+    <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ successMessage }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+<div class="container mt-5 h4">
+    <div class="row">
+        {{headerText}}
+        <hr class="hr bg-secondary border-2 border-top border-secondary" />
+    </div>
+</div>
+<div class="container mt-5 form-container form-background-color">
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="taskTitle" class="form-label">Enter Task Title<span class="required">*</span></label>
+                    <input type="text" class="form-control" id="taskTitle" formControlName="taskTitle"
+                        placeholder="Task Title">
+                </div>
+                <div class="mb-3">
+                    <label for="taskType" class="form-label">Select Task Type<span
+                            class="required">*</span></label>
+                    <select id="taskType" class="form-select" formControlName="taskType">
+                        <option value="">-- Select Type -- </option>
+                        <option *ngFor="let taskType of taskTypes" [value]=taskType.value>{{taskType.value}}</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="taskPriority" class="form-label">Select Task Priority<span
+                            class="required">*</span></label>
+                    <select id="taskPriority" class="form-select" formControlName="taskPriority">
+                        <option value="">-- Select Priority -- </option>
+                        <option *ngFor="let taskPriority of taskPriorities" [value]=taskPriority.value>{{taskPriority.value}}</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="taskStatus" class="form-label">Select Task Status<span
+                            class="required">*</span></label>
+                    <select id="taskStatus" class="form-select" formControlName="taskStatus">
+                        <option value="">-- Select Status -- </option>
+                        <option *ngFor="let taskStatus of taskStatuses" [value]=taskStatus.value>{{taskStatus.value}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="taskstartDate" class="form-label">Select Task Start Date<span
+                            class="required">*</span></label>
+                    <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker
+                        formControlName="taskstartDate" #startPicker="ngbDatepicker" (click)="startPicker.toggle()"
+                        readonly />
+                </div>
+                <div class="mb-3">
+                    <label for="taskEndDate" class="form-label">Select Task End Date<span
+                            class="required">*</span></label>
+                    <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker formControlName="taskEndDate"
+                        #endPicker="ngbDatepicker" (click)="endPicker.toggle()" readonly />
+                </div>
+                <div class="mb-3">
+                    <label for="projectId" class="form-label">Select Project<span
+                            class="required">*</span></label>
+                    <select id="projectId" class="form-select" formControlName="projectId">
+                        <option value="">-- Select Project -- </option>
+                        <option *ngFor="let project of projects$ | async" [value]=project.id>{{project.projectName}}</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="taskAssignedTo" class="form-label">Select Task assigned to<span
+                            class="required">*</span></label>
+                    <select id="taskAssignedTo" class="form-select" formControlName="taskAssignedTo">
+                        <option value="">-- Assigned User-- </option>
+                        <option *ngFor="let user of users$ | async" [value]=user.id>{{user.firstName + ' ' +
+                            user.lastName }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <label for="taskDescription" class="form-label">Enter Task Description<span
+                            class="required">*</span></label>
+                    <textarea type="text" class="form-control" id="taskDescription"
+                        formControlName="taskDescription" placeholder="Task Description"></textarea>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <label for="file" class="form-label">Upload Document (.pdf, .docs, .webp)</label>
+                    <input type="file" id="file" class="form-control" (change)="onFileChange($event)">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="submit-button btn mx-auto d-block"
+            [disabled]="taskForm.invalid">{{buttonText}}</button>
+    </form>
+</div>
