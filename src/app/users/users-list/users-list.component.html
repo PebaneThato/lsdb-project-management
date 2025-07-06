@@ -16,13 +16,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of users">
+            <tr *ngFor="let user of users | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
                 <td>{{ user.firstName }} {{ user.lastName }}</td>
                 <td>{{ user.userRole }}</td>
-                 <td><button class="action-button btn btn-sm mx-auto d-block">View Tasks</button></td>
-                <td><button class="action-button btn btn-sm mx-auto d-block" (click)="onViewUser(user)">View Details</button></td>
-                <td><button class="action-button btn btn-sm mx-auto d-block" (click)="onUpdateUser(user)">Update</button></td>
+                <td><button class="action-button btn btn-sm mx-auto d-block">View Tasks</button></td>
+                <td><button class="action-button btn btn-sm mx-auto d-block" (click)="onViewUser(user)">View
+                        Details</button></td>
+                <td><button class="action-button btn btn-sm mx-auto d-block"
+                        (click)="onUpdateUser(user)">Update</button></td>
             </tr>
         </tbody>
     </table>
+    <pagination-controls
+        (pageChange)="currentPage = $event"
+        [autoHide]="true"
+        previousLabel="Prev"
+        nextLabel="Next"
+        class="my-3 d-flex justify-content-center">
+    </pagination-controls>
 </div>

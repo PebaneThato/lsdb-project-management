@@ -10,6 +10,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UsersListComponent {
   users: User[] = [];
+  currentPage = 1;
+  itemsPerPage = 5;
 
   constructor(private userService: UserService, private router: Router) { }
 

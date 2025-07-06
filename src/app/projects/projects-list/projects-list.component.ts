@@ -14,15 +14,17 @@ import { UserService } from 'src/app/services/user.service';
 export class ProjectsListComponent {
   projects: Project[] = [];
   projects$: Observable<Project[]> | undefined;
+  currentPage = 1;
+  itemsPerPage = 5;
 
-  constructor(private projectervice: ProjectService, private router: Router, private authService : AuthService) { }
+  constructor(private projectervice: ProjectService, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     const isProjectManager = this.authService.isProjectManager;
     const currentUserId = this.authService.currentUserValue.id;
     this.projects$ = isProjectManager ? this.projectervice.getProjects().pipe(
-          map(projects => projects.filter(project => project.projectAssignedTo == currentUserId))
-        ) : this.projectervice.getProjects();
+      map(projects => projects.filter(project => project.projectAssignedTo == currentUserId))
+    ) : this.projectervice.getProjects();
   }
 
   onViewProject(project: Project) {
