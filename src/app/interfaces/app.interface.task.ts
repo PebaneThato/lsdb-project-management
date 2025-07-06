@@ -1,5 +1,3 @@
-import { Project } from "./app.interface.project";
-
 export interface Task {
   id: number;
   taskTitle: string;
