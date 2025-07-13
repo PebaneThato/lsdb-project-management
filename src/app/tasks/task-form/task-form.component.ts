@@ -101,12 +101,6 @@ export class TaskFormComponent {
   }
 
   handleFileInput(event: Event): void {
-    Object.keys(this.taskForm.controls).forEach(controlName => {
-      const control = this.taskForm.get(controlName);
-      if (control?.errors) {
-        console.log(`${controlName} has errors:`, control.errors);
-      }
-    });
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
     const allowed = ['application/pdf', 'application/msword', 'image/webp'];
@@ -139,7 +133,6 @@ export class TaskFormComponent {
         formData.append('file', this.fileToUpload);
       }
 
-      console.log(formData);
       if (this.isEditMode) {
         this.taskService.updateTask(formData).subscribe(() => {
           this.successMessage = 'Task updated successfully!';
