@@ -11,7 +11,7 @@
     </div>
 </div>
 <div class="container mt-5 form-container form-background-color">
-    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-3">
@@ -87,7 +87,7 @@
             <div class="col-md-12">
                 <div class="mb-3">
                     <label for="file" class="form-label">Upload Document (.pdf, .docs, .webp)</label>
-                    <input type="file" id="file" class="form-control" (change)="onFileChange($event)">
+                    <input type="file" id="file" formControlName="file" class="form-control" (change)="handleFileInput($event)" accept=".pdf,.doc,.docx,.webp">
                 </div>
             </div>
         </div>

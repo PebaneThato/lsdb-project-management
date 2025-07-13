@@ -24,12 +24,12 @@ export class TaskService {
     return this.http.get<Task[]>('/api/tasks.php');
   }
 
-  createTask(task: Task): Observable<Task> {
-    return this.http.post<Task>('/api/task-management.php', task);
+  createTask(formData: FormData): Observable<Task> {
+    return this.http.post<Task>('/api/task-management.php', formData);
   }
 
-  updateTask(task: Task): Observable<Task> {
-    return this.http.put<Task>('/api/task-management.php', task);
+  updateTask(formData: FormData): Observable<Task> {
+    return this.http.put<Task>('/api/task-management.php', formData);
   }
 
   fetchTaskById(id: number): Observable<Task> {

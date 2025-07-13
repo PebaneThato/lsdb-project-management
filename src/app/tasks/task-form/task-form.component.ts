@@ -27,25 +27,32 @@ export class TaskFormComponent {
   buttonText: string = 'CREATE TASK';
   headerText: string = 'Create New Task';
   projects$: Observable<Project[]> | undefined;
+  fileToUpload: File | null = null;
 
   taskTypes = [
     { value: 'Daily Task' },
-    { value: 'Weekly Task' },
-    { value: 'Monthly Task' },
+    { value: 'Bug' },
+    { value: 'New Development' },
+    { value: 'Testing' },
+    { value: 'Sales' },
+    { value: 'Feature' },
   ];
 
   taskPriorities = [
-    { value: 'Low' },
-    { value: 'Medium' },
+    { value: 'Critical' },
     { value: 'High' },
+    { value: 'Medium' },
+    { value: 'Low' },
+    { value: 'Best Effort' },
   ];
 
   taskStatuses = [
-    { value: 'To Do' },
-    { value: 'In Progress' },
-    { value: 'Testing' },
-    { value: 'Review' },
+    { value: 'Ready to Start' },
+    { value: 'In process' },
+    { value: 'Pending Deploy' },
+    { value: 'Stuck' },
     { value: 'Done' },
+    { value: 'Waiting for Review' },
   ];
 
   constructor(private fb: FormBuilder, private taskService: TaskService, private userService: UserService,
@@ -93,32 +100,54 @@ export class TaskFormComponent {
     );
   }
 
-  onFileChange(event: any) {
-    const file = event.target.files[0];
-    console.log(file);
-    if (file) {
-      this.taskForm.patchValue({ file });
+  handleFileInput(event: Event): void {
+    Object.keys(this.taskForm.controls).forEach(controlName => {
+      const control = this.taskForm.get(controlName);
+      if (control?.errors) {
+        console.log(`${controlName} has errors:`, control.errors);
+      }
+    });
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    const allowed = ['application/pdf', 'application/msword', 'image/webp'];
+    if (file && allowed.includes(file.type)) {
+      this.fileToUpload = file;
+    } else {
+      alert('Only PDF, DOC, or WEBP files are allowed.');
     }
   }
 
   onSubmit(): void {
     if (this.taskForm.valid) {
 
-      console.log(this.taskForm.value);
       const startDate = this.formatDate(this.taskForm.value.taskstartDate);
       const endDate = this.formatDate(this.taskForm.value.taskEndDate);
 
       this.taskForm.patchValue({ taskstartDate: startDate });
       this.taskForm.patchValue({ taskEndDate: endDate });
 
+      const formData = new FormData();
+      Object.entries(this.taskForm.value).forEach(([key, value]) => {
+        if (key != 'file') {
+          return formData.append(key, value as string);
+        }
+      });
+      formData.append('taskCreatedByName', 'Admin');
+      formData.append('taskAssignedToName', 'John Doe');
+      formData.append('projectName', 'My Project');
+      if (this.fileToUpload) {
+        formData.append('file', this.fileToUpload);
+      }
+
+      console.log(formData);
       if (this.isEditMode) {
-        this.taskService.updateTask(this.taskForm.value).subscribe(() => {
+        this.taskService.updateTask(formData).subscribe(() => {
           this.successMessage = 'Task updated successfully!';
           this.submittedTaskData = this.taskForm.value as Task;
           this.taskForm.reset();
         });
       } else {
-        this.taskService.createTask(this.taskForm.value).subscribe(response => {
+        this.taskService.createTask(formData).subscribe(response => {
           this.successMessage = 'Task successfully registered!';
           this.submittedTaskData = this.taskForm.value as Task;
           this.taskForm.reset();
