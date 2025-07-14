@@ -61,7 +61,7 @@
                 <div class="mb-3">
                     <label for="projectId" class="form-label">Select Project<span
                             class="required">*</span></label>
-                    <select id="projectId" class="form-select" formControlName="projectId">
+                    <select id="projectId" class="form-select" formControlName="projectId" (change)="onProjectSelect($event)">
                         <option value="">-- Select Project -- </option>
                         <option *ngFor="let project of projects$ | async" [value]=project.id>{{project.projectName}}</option>
                     </select>
@@ -69,7 +69,7 @@
                 <div class="mb-3">
                     <label for="taskAssignedTo" class="form-label">Select Task assigned to<span
                             class="required">*</span></label>
-                    <select id="taskAssignedTo" class="form-select" formControlName="taskAssignedTo">
+                    <select id="taskAssignedTo" class="form-select" formControlName="taskAssignedTo" (change)="onUserSelect($event)">
                         <option value="">-- Assigned User-- </option>
                         <option *ngFor="let user of users$ | async" [value]=user.id>{{user.firstName + ' ' +
                             user.lastName }}</option>

@@ -28,6 +28,8 @@ export class TaskFormComponent {
   headerText: string = 'Create New Task';
   projects$: Observable<Project[]> | undefined;
   fileToUpload: File | null = null;
+  taskProjectName: string = '';
+  taskUserName: string = '';
 
   taskTypes = [
     { value: 'Daily Task' },
@@ -126,9 +128,10 @@ export class TaskFormComponent {
           return formData.append(key, value as string);
         }
       });
-      formData.append('taskCreatedByName', 'Admin');
-      formData.append('taskAssignedToName', 'John Doe');
-      formData.append('projectName', 'My Project');
+      formData.append('taskCreatedBy', this.authService.currentUserValue.id);
+      formData.append('taskCreatedByName', this.authService.currentUserValue.first_name + ' ' + this.authService.currentUserValue.last_name);
+      formData.append('taskAssignedToName', this.taskUserName);
+      formData.append('projectName', this.taskProjectName);
       if (this.fileToUpload) {
         formData.append('file', this.fileToUpload);
       }
@@ -162,4 +165,34 @@ export class TaskFormComponent {
     const [year, month, day] = dateString.split('-').map(Number);
     return { year, month, day };
   }
+
+  onProjectSelect(event: Event): void {
+    const projectId = +(event.target as HTMLSelectElement).value;
+    this.projects$?.pipe(
+      map(projects => projects.find(project => project.id === projectId))
+    )
+      .subscribe({
+        next: (project) => {
+          if (project) {
+            this.taskProjectName = project.projectName;
+          }
+        }
+      });
+  }
+
+  onUserSelect(event: Event): void {
+    const userId = +(event.target as HTMLSelectElement).value;
+    this.users$?.pipe(
+      map(users => users.find(user => user.id === userId))
+    )
+      .subscribe({
+        next: (user) => {
+          if (user) {
+            this.taskUserName = user.firstName + ' ' + user.lastName;
+          }
+        }
+      });
+  }
+
+
 }
