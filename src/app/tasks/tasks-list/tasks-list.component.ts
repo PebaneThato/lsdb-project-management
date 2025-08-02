@@ -27,7 +27,8 @@ export class TasksListComponent {
   constructor(private taskService: TaskService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
-    this.taskService.getTasks().subscribe(tasks =>{
+    const currentUserId = this.authService.currentUserValue.id;
+    this.taskService.fetchTaskByAssignedTo(currentUserId).subscribe(tasks =>{
       this.allTasks = tasks;
       this.filteredTasks = [...this.allTasks];
     });

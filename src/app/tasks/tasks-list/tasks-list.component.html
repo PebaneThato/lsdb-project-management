@@ -75,7 +75,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let task of filteredTasks">
+        <tr *ngFor="let task of filteredTasks | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };">
           <td>{{ task.id }}</td>
           <td>{{ task.taskTitle }}</td>
           <td>{{ task.taskType }}</td>

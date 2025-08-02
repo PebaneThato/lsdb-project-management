@@ -36,8 +36,8 @@ export class TaskService {
     return this.http.get<Task>(`/api/tasks.php?id=${id}`);
   }
 
-  fetchTaskByAssignedTo(taskAssignedTo: number): Observable<Task> {
-    return this.http.get<Task>(`/api/tasks.php?taskAssignedTo=${taskAssignedTo}`);
+  fetchTaskByAssignedTo(taskAssignedTo: number):Observable<Task[]> {
+    return this.http.get<Task[]>(`/api/tasks.php?taskAssignedTo=${taskAssignedTo}`);
   }
 
   downloadFile(filename: string) {
