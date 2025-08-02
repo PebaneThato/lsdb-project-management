@@ -1,1 +1,102 @@
-<p>task-list works!</p>
+<div class="container mt-5 h4">
+  <div class="row">
+    Tasks List
+    <hr class="hr bg-secondary border-2 border-top border-secondary" />
+  </div>
+</div>
+<div class="container mt-5 table-container">
+  <div class="card rounded-0 no-bottom-border">
+    <div class="card-body">
+      <!-- Filters Row -->
+      <div class="row g-2 mb-3 align-items-end">
+        <div class="col-md-3">
+          <label for="statusFilter" class="form-label">Task Status</label>
+          <select
+            id="statusFilter"
+            [(ngModel)]="filters.status"
+            class="form-select"
+            (ngModelChange)="applyFilters()"
+          >
+            <option value="">Select Task Status</option>
+            <option
+              *ngFor="let taskStatus of taskStatuses"
+              [value]="taskStatus.value"
+            >
+              {{ taskStatus.value }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <label for="startDateFilter" class="form-label">Start Date</label>
+          <input
+            type="date"
+            id="startDateFilter"
+            class="form-control"
+            [(ngModel)]="filters.startDate"
+            (ngModelChange)="applyFilters()"
+          />
+        </div>
+
+        <div class="col-md-3">
+          <label for="endDateFilter" class="form-label">End Date</label>
+          <input
+            type="date"
+            id="endDateFilter"
+            class="form-control"
+            [(ngModel)]="filters.endDate"
+            (ngModelChange)="applyFilters()"
+          />
+        </div>
+
+        <div class="col-md-3 d-flex justify-content-end">
+          <button
+            class="action-button btn btn-secondary mt-3 w-100"
+            (click)="resetFilters()"
+          >
+            Reset Filters
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Task Table -->
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered custom-bordered">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>End Date</th>
+          <th>Details</th>
+          <th>Task History</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of filteredTasks">
+          <td>{{ task.id }}</td>
+          <td>{{ task.taskTitle }}</td>
+          <td>{{ task.taskType }}</td>
+          <td>{{ task.taskStatus }}</td>
+          <td>{{ task.taskEndDate }}</td>
+          <td>
+            <button
+              class="action-button btn btn-sm me-1"
+              (click)="onViewProject(task)"
+            >
+              View
+            </button>
+          </td>
+          <td>
+            <button class="action-button btn btn-sm">View</button>
+          </td>
+        </tr>
+        <tr *ngIf="filteredTasks.length === 0">
+          <td colspan="6" class="text-center">No tasks found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
+import { TASK_STATUSES } from 'src/app/shared/app.constants';
 
 @Component({
   selector: 'app-task-form',
@@ -48,14 +49,7 @@ export class TaskFormComponent {
     { value: 'Best Effort' },
   ];
 
-  taskStatuses = [
-    { value: 'Ready to Start' },
-    { value: 'In process' },
-    { value: 'Pending Deploy' },
-    { value: 'Stuck' },
-    { value: 'Done' },
-    { value: 'Waiting for Review' },
-  ];
+  taskStatuses = TASK_STATUSES;
 
   constructor(private fb: FormBuilder, private taskService: TaskService, private userService: UserService,
     private route: ActivatedRoute, private authService: AuthService, private projectervice: ProjectService) {

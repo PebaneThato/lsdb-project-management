@@ -1,0 +1,36 @@
+.h4 {
+    font-size: 1.5rem;
+}
+
+.table-container {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+table thead th {
+  text-align: center;
+}
+
+thead>tr>th {
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.custom-bordered,
+.custom-bordered th,
+.custom-bordered td {
+  border: 1.5px solid #cbc5c5 !important;
+}
+
+.action-button {
+    background-color: #0000b3;
+    color: #fff;
+}
+
+.hr {
+  margin-top: 19px;
+}
+
+.no-bottom-border {
+  border-bottom: none !important;
+}

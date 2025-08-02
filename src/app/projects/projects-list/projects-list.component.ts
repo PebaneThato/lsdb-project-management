@@ -4,7 +4,6 @@ import { map, Observable, of } from 'rxjs';
 import { Project } from 'src/app/interfaces/app.interface.project';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProjectService } from 'src/app/services/project.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-projects-list',
@@ -28,7 +27,6 @@ export class ProjectsListComponent {
   }
 
   onViewProject(project: Project) {
-    console.log(project);
     this.projectervice.setSelectedProject(project);
     this.router.navigate(['/project-details', project.id]);
   }

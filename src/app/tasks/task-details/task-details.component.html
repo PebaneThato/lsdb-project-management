@@ -1,1 +1,119 @@
-<p>task-details works!</p>
+<div class="container mt-5 h4">
+  <div class="row">
+    Task Details
+    <hr class="hr bg-secondary border-2 border-top border-secondary" />
+  </div>
+  <button class="action-button btn btn-sm mx-auto" (click)="onViewTask()">
+    Back
+  </button>
+</div>
+<div *ngIf="task" class="container mt-5 details-container">
+  <div class="card mb-3 card">
+    <div class="card-header h4 card-header-text">Task Details</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Task Title</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ task.taskTitle }}
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Task Type</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ task.taskType }}
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Start Date</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ task.taskstartDate }}
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Assigned To</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ task.taskAssignedToName }}
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Task Priority</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ task.taskPriority }}
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Task Description</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ task.taskDescription }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Task Status</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ task.taskStatus }}
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Project Name</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ task.projectName }}
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">End Date</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ task.taskEndDate }}
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Created By</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ task.taskCreatedByName }}
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Uploaded File</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ task.file }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
