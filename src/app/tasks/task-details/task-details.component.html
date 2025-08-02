@@ -109,7 +109,10 @@
               <h6 class="mb-0">Uploaded File</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              {{ file.filename }}
+              <a style="cursor: pointer" (click)="download(file.filename)">
+                <i class="bi bi-file-earmark-arrow-down"></i>
+                {{ file.filename }}
+              </a>
             </div>
           </div>
         </div>

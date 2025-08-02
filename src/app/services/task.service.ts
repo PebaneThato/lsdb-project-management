@@ -40,4 +40,10 @@ export class TaskService {
     return this.http.get<Task>(`/api/tasks.php?taskAssignedTo=${taskAssignedTo}`);
   }
 
+  downloadFile(filename: string) {
+    return this.http.get(`/api/files.php?filename=${encodeURIComponent(filename)}`, {
+      responseType: 'blob'
+    });
+  }
+
 }

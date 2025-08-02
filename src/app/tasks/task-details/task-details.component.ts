@@ -36,12 +36,29 @@ export class TaskDetailsComponent {
         }
       });
     }
-    console.log(this.file);
-    console.log(this.task);
   }
 
   onViewTask() {
     this.router.navigate(['/tasks-list']);
+  }
+
+  download(filename: string) {
+    if (!filename) return;
+    this.taskService.downloadFile(filename).subscribe({
+      next: (fileContent: Blob | MediaSource) => {
+        const url = window.URL.createObjectURL(fileContent);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err: any) => {
+        this.error = 'Failed to download the file, please update the task with the latest document.';
+      }
+    });
   }
 
 }
