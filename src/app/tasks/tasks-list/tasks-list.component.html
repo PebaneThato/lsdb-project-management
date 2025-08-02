@@ -98,5 +98,13 @@
         </tr>
       </tbody>
     </table>
+    <pagination-controls
+      (pageChange)="currentPage = $event"
+      [autoHide]="true"
+      previousLabel="Prev"
+      nextLabel="Next"
+      class="my-3 d-flex justify-content-center"
+    >
+    </pagination-controls>
   </div>
 </div>

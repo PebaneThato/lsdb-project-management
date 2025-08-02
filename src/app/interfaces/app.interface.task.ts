@@ -4,7 +4,7 @@ export interface Task {
   taskType: string;
   taskPriority: string;
   taskStatus: string;
-  taskstartDate: string;
+  taskStartDate: string;
   taskEndDate: string;
   projectId: number;
   projectName: string;

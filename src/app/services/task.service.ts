@@ -35,4 +35,9 @@ export class TaskService {
   fetchTaskById(id: number): Observable<Task> {
     return this.http.get<Task>(`/api/tasks.php?id=${id}`);
   }
+
+  fetchTaskByAssignedTo(taskAssignedTo: number): Observable<Task> {
+    return this.http.get<Task>(`/api/tasks.php?taskAssignedTo=${taskAssignedTo}`);
+  }
+
 }

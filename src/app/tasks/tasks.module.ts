@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms'
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { TasksListComponent } from './tasks-list/tasks-list.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
@@ -18,7 +19,8 @@ import { TaskFormComponent } from './task-form/task-form.component';
     CommonModule,
     ReactiveFormsModule,
     NgbModule,
-    FormsModule 
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class TasksModule { }

@@ -21,64 +21,17 @@ export class TasksListComponent {
     endDate: ''
   };
 
+  currentPage = 1;
+  itemsPerPage = 5;
+
   constructor(private taskService: TaskService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
-    // Replace with your actual data source
-    this.allTasks = [
-      {
-        id: 1,
-        taskTitle: "Task A",
-        taskType: "Testing B",
-        taskPriority: "Critical",
-        taskStatus: "In process",
-        taskstartDate: "2025-08-15",
-        taskEndDate: "2025-08-15",
-        projectId: 1,
-        projectName: "test Project",
-        taskAssignedTo: 1,
-        taskAssignedToName: "Test Name",
-        taskCreatedBy: 2,
-        taskCreatedByName: "",
-        taskDescription: "",
-        file: null
-      },
-      {
-        id: 1,
-        taskTitle: "Task B",
-        taskType: "Testing B",
-        taskPriority: "Critical",
-        taskStatus: "In process",
-        taskstartDate: "2025-08-15",
-        taskEndDate: "2026-04-23",
-        projectId: 1,
-        projectName: "test Project",
-        taskAssignedTo: 1,
-        taskAssignedToName: "Test Name",
-        taskCreatedBy: 2,
-        taskCreatedByName: "",
-        taskDescription: "",
-        file: null
-      },
-      {
-        id: 1,
-        taskTitle: "Task C",
-        taskType: "Testing C",
-        taskPriority: "Critical",
-        taskStatus: "In process",
-        taskstartDate: "2025-08-15",
-        taskEndDate: "2025-08-15",
-        projectId: 1,
-        projectName: "test Project",
-        taskAssignedTo: 1,
-        taskAssignedToName: "Test Name",
-        taskCreatedBy: 2,
-        taskCreatedByName: "",
-        taskDescription: "",
-        file: null
-      }
-    ];
-    this.filteredTasks = [...this.allTasks];
+    this.taskService.getTasks().subscribe(tasks =>{
+      this.allTasks = tasks;
+      this.filteredTasks = [...this.allTasks];
+    });
+  
   }
 
   get uniqueStatuses(): string[] {

@@ -12,6 +12,7 @@ export class TaskDetailsComponent {
   task: Task | null = null;
   loading = true;
   error = '';
+  file: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private taskService: TaskService) { }
 
@@ -20,11 +21,13 @@ export class TaskDetailsComponent {
     const storedTask = this.taskService.getSelectedTask();
     if (storedTask && storedTask.id === id) {
       this.task = storedTask;
+      this.file = storedTask.file
       this.loading = false;
     } else {
       this.taskService.fetchTaskById(id).subscribe({
         next: (task) => {
           this.task = task;
+          this.file = task.file
           this.loading = false;
         },
         error: (err) => {
@@ -33,6 +36,8 @@ export class TaskDetailsComponent {
         }
       });
     }
+    console.log(this.file);
+    console.log(this.task);
   }
 
   onViewTask() {

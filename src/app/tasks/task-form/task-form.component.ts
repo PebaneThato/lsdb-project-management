@@ -59,7 +59,7 @@ export class TaskFormComponent {
       taskType: ['', Validators.required],
       taskPriority: ['', Validators.required],
       taskStatus: ['', Validators.required],
-      taskstartDate: [null, Validators.required],
+      taskStartDate: [null, Validators.required],
       taskEndDate: [null, Validators.required],
       projectId: ['', Validators.required],
       taskAssignedTo: ['', Validators.required],
@@ -77,7 +77,7 @@ export class TaskFormComponent {
         this.taskService.fetchTaskById(this.taskId).subscribe({
           next: (task) => {
             this.taskForm.patchValue(task);
-            this.taskForm.patchValue({ taskstartDate: this.parseDate(task['taskstartDate']) });
+            this.taskForm.patchValue({ taskStartDate: this.parseDate(task['taskStartDate']) });
             this.taskForm.patchValue({ taskEndDate: this.parseDate(task['taskEndDate']) });
           }
         });
@@ -110,10 +110,10 @@ export class TaskFormComponent {
   onSubmit(): void {
     if (this.taskForm.valid) {
 
-      const startDate = this.formatDate(this.taskForm.value.taskstartDate);
+      const startDate = this.formatDate(this.taskForm.value.taskStartDate);
       const endDate = this.formatDate(this.taskForm.value.taskEndDate);
 
-      this.taskForm.patchValue({ taskstartDate: startDate });
+      this.taskForm.patchValue({ taskStartDate: startDate });
       this.taskForm.patchValue({ taskEndDate: endDate });
 
       const formData = new FormData();
