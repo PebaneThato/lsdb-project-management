@@ -1,0 +1,31 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { TaskComment } from '../interfaces/task-comment.interface';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TaskCommentService {
+
+  constructor(private http: HttpClient) {}
+
+  /**
+   * Get all comments for a specific task
+   */
+  getCommentsByTaskId(taskId: number): Observable<TaskComment[]> {
+    return this.http.get<TaskComment[]>(`/api/task-comment.php/${taskId}`);
+  }
+
+  /**
+   * Add a new comment
+   */
+  addComment(comment: Partial<TaskComment>): Observable<TaskComment> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<TaskComment>(`/api/task-comment.php`, comment, { headers });
+  }
+
+}
