@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'src/app/interfaces/app.interface.task';
-import { TaskComment } from 'src/app/interfaces/task-comment.interface';
+import { TaskComment, TaskCommentResponse } from 'src/app/interfaces/task-comment.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { TaskCommentService } from 'src/app/services/task-comment.service';
 import { TaskService } from 'src/app/services/task.service';
@@ -101,11 +101,10 @@ export class TaskDetailsComponent {
       commentDateTime: this.getCurrentFormattedDateTime()
     };
 
-    // Send comment to backend
     this.taskCommentService.addComment(newComment).subscribe({  
-      next: (response: TaskComment) => {
+      next: (response: TaskCommentResponse) => {
         // Add the new comment to the beginning of the list
-        this.comments.unshift(newComment);
+        this.comments.unshift(response['data']);
         this.commentText = '';
         this.showButton = false;
         this.isSubmitting = false;
@@ -113,7 +112,6 @@ export class TaskDetailsComponent {
       error: (error) => {
         console.error('Error adding comment:', error);
         this.isSubmitting = false;
-        // You might want to show an error message to the user
       }
     });
   }
@@ -129,7 +127,7 @@ export class TaskDetailsComponent {
     });
   }
 
-  private getCurrentUserId(): string {
+  private getCurrentUserId(): number {
     return this.authService.currentUserValue.id;
   }
 
