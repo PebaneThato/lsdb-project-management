@@ -1,7 +1,9 @@
+import { DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'src/app/interfaces/app.interface.task';
 import { TaskComment } from 'src/app/interfaces/task-comment.interface';
+import { AuthService } from 'src/app/services/auth.service';
 import { TaskCommentService } from 'src/app/services/task-comment.service';
 import { TaskService } from 'src/app/services/task.service';
 
@@ -15,27 +17,30 @@ export class TaskDetailsComponent {
   loading = true;
   error = '';
   file: any;
-
-  @Input() taskId: number = 0;
+  taskId: number = 0;
   
   commentText: string = '';
   comments: TaskComment[] = [];
-  showCancelButton: boolean = false;
+  showButton: boolean = false;
   isSubmitting: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private taskService: TaskService, private taskCommentService: TaskCommentService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private taskService: TaskService, private taskCommentService: TaskCommentService,
+    private authService: AuthService, private datePipe: DatePipe
+  ) { }
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id')!;
     const storedTask = this.taskService.getSelectedTask();
     if (storedTask && storedTask.id === id) {
       this.task = storedTask;
+      this.taskId = storedTask.id
       this.file = storedTask.file
       this.loading = false;
     } else {
       this.taskService.fetchTaskById(id).subscribe({
         next: (task) => {
           this.task = task;
+          this.taskId = task.id
           this.file = task.file
           this.loading = false;
         },
@@ -72,12 +77,12 @@ export class TaskDetailsComponent {
   }
 
   onTextAreaInput(): void {
-    this.showCancelButton = this.commentText.trim().length > 0;
+    this.showButton = this.commentText.trim().length > 0;
   }
 
   onCancel(): void {
     this.commentText = '';
-    this.showCancelButton = false;
+    this.showButton = false;
   }
 
   onComment(): void {
@@ -93,16 +98,16 @@ export class TaskDetailsComponent {
       commentAddedById: this.getCurrentUserId(),
       commentAddedByName: this.getCurrentUserName(),
       commentId: 0,
-      commentDateTime: ''
+      commentDateTime: this.getCurrentFormattedDateTime()
     };
 
     // Send comment to backend
     this.taskCommentService.addComment(newComment).subscribe({  
       next: (response: TaskComment) => {
         // Add the new comment to the beginning of the list
-        this.comments.unshift(response);
+        this.comments.unshift(newComment);
         this.commentText = '';
-        this.showCancelButton = false;
+        this.showButton = false;
         this.isSubmitting = false;
       },
       error: (error) => {
@@ -125,23 +130,23 @@ export class TaskDetailsComponent {
   }
 
   private getCurrentUserId(): string {
-    // Implement this method to return current user ID
-    // This could come from a user service, JWT token, etc.
-    return 'current-user-id';
+    return this.authService.currentUserValue.id;
   }
 
   private getCurrentUserName(): string {
-    // Implement this method to return current user name
-    // This could come from a user service, JWT token, etc.
-    return 'Current User';
-  }
-
-  formatDateTime(date: string, time: string): string {
-    return `${date} ${time}`;
+    return this.authService.currentUserValue.first_name + ' ' + this.authService.currentUserValue.last_name;
   }
 
   trackByCommentId(index: number, comment: TaskComment): number {
-    return comment.commentId;
+    return comment?.commentId;
+  }
+
+  getCurrentFormattedDateTime(): string {
+    return this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss') || '';
+  }
+
+  dateObject(dateTime: string): Date {
+    return new Date(dateTime);
   }
 
 }

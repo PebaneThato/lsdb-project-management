@@ -25,7 +25,7 @@ export class TaskCommentService {
       'Content-Type': 'application/json'
     });
 
-    return this.http.post<TaskComment>(`/api/task-comment.php`, comment, { headers });
+    return this.http.post<TaskComment>(`/api/task-comment-management.php`, comment, { headers });
   }
 
 }
