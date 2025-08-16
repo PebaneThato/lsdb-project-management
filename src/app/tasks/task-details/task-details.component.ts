@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'src/app/interfaces/app.interface.task';
-import { TaskComment, TaskCommentResponse } from 'src/app/interfaces/task-comment.interface';
+import { TaskComment, TaskCommentResponse, TaskCommentsResponse } from 'src/app/interfaces/task-comment.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { TaskCommentService } from 'src/app/services/task-comment.service';
 import { TaskService } from 'src/app/services/task.service';
@@ -18,7 +18,7 @@ export class TaskDetailsComponent {
   error = '';
   file: any;
   taskId: number = 0;
-  
+
   commentText: string = '';
   comments: TaskComment[] = [];
   showButton: boolean = false;
@@ -36,6 +36,7 @@ export class TaskDetailsComponent {
       this.taskId = storedTask.id
       this.file = storedTask.file
       this.loading = false;
+      this.loadComments(this.taskId);
     } else {
       this.taskService.fetchTaskById(id).subscribe({
         next: (task) => {
@@ -43,6 +44,7 @@ export class TaskDetailsComponent {
           this.taskId = task.id
           this.file = task.file
           this.loading = false;
+          this.loadComments(this.taskId);
         },
         error: (err) => {
           this.error = 'Failed to load task.';
@@ -73,7 +75,6 @@ export class TaskDetailsComponent {
         this.error = 'Failed to download the file, please update the task with the latest document.';
       }
     });
-    this.loadComments(this.taskId);
   }
 
   onTextAreaInput(): void {
@@ -91,7 +92,7 @@ export class TaskDetailsComponent {
     }
 
     this.isSubmitting = true;
-    
+
     const newComment: TaskComment = {
       commentContent: this.commentText.trim(),
       taskId: this.taskId,
@@ -101,7 +102,7 @@ export class TaskDetailsComponent {
       commentDateTime: this.getCurrentFormattedDateTime()
     };
 
-    this.taskCommentService.addComment(newComment).subscribe({  
+    this.taskCommentService.addComment(newComment).subscribe({
       next: (response: TaskCommentResponse) => {
         // Add the new comment to the beginning of the list
         this.comments.unshift(response['data']);
@@ -117,9 +118,9 @@ export class TaskDetailsComponent {
   }
 
   private loadComments(taskId: number): void {
-    this.taskCommentService.getCommentsByTaskId(taskId).subscribe({  
-      next: (comments: TaskComment[]) => {
-        this.comments = comments;
+    this.taskCommentService.getCommentsByTaskId(taskId).subscribe({
+      next: (comments: TaskCommentsResponse) => {
+        this.comments = comments['data'];
       },
       error: (error) => {
         console.error('Error loading comments:', error);

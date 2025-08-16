@@ -12,3 +12,9 @@ export interface TaskCommentResponse {
     message: string;
     data: TaskComment;
 }
+
+export interface TaskCommentsResponse {
+    success: string;
+    message: string;
+    data: TaskComment[];
+}
