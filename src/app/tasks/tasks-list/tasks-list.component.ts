@@ -22,7 +22,7 @@ export class TasksListComponent {
   };
 
   currentPage = 1;
-  itemsPerPage = 5;
+  itemsPerPage = 10;
 
   constructor(private taskService: TaskService, private router: Router, private authService: AuthService) { }
 
